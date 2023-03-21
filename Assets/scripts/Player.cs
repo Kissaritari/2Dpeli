@@ -1,7 +1,8 @@
+using Assets.scripts;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
     private float jumpingpower = 6f;
@@ -11,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
     private bool ilmassa;
     private SpriteRenderer _renderer;
     private Animator _animator;
-
+    private Creature stats;
     private void Start()
     {
-
+        stats = GetComponent<Creature>();
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
@@ -51,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
         _rb.velocity = new Vector2(horizontal * nopeus, _rb.velocity.y);
         if (_rb.velocity.x != 0) { _animator.SetBool("movement", true); }
         else { _animator.SetBool("movement",false); }
-        Debug.Log(_animator.GetFloat("movement"));
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
