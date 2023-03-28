@@ -45,6 +45,9 @@ public class Player : MonoBehaviour
         {
             _renderer.flipX = true;
         }
+        if (_rb.transform.position.y < -10) {
+            Destroy(gameObject);
+        }
         
     }
     private void FixedUpdate()
