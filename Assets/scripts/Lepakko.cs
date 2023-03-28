@@ -1,4 +1,5 @@
 using Assets.scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,10 @@ using UnityEngine;
 public class Lepakko : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    private float nopeus = 4f;
     private SpriteRenderer _renderer;
     private Creature stats;
-    
+    private float y = 1.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,19 @@ public class Lepakko : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _rb.velocity = new Vector2( nopeus, _rb.velocity.y);
+        // Move the object forward along its z axis 1 unit/second.
+        transform.Translate(stats.Speed * Time.deltaTime, y * Time.deltaTime, 0f);
 
+
+        if ((GetComponent<Transform>().position.x > 8f) ||
+            (GetComponent<Transform>().position.x < -8f))
+        {
+            transform.Rotate(0f, 180f, 0f);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 }
+ 

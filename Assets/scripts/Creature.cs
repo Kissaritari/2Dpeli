@@ -8,6 +8,7 @@ namespace Assets.scripts
         public int Damage;
         private int Health;
         public int MaxHealth;
+        public float Speed;
         // Use this for initialization
         void Start()
         {

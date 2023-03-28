@@ -12,9 +12,9 @@ namespace Assets.scripts
 
             if (collision.gameObject.tag == "Player")
             {
-                int damage = GameObject.GetComponent<Creature>().Damage;
+                int damage = GetComponent<Creature>().Damage;
                 collision.gameObject.GetComponent<Creature>().GetDamaged(damage);
-
+                
             }
         }
     }
