@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class healthbar : MonoBehaviour
 {
     public Slider healthbarSlider;
-    private Player playerRef;
+    private GameObject playerRef;
     public bool atMaxHp;
     // Start is called before the first frame update
     void Start()
     {
         atMaxHp = true;
-        playerRef = GetComponent<Player>();
+        playerRef = GameObject.FindGameObjectWithTag("Player");
         // healthbarSlider = GetComponent<Slider>();
         healthbarSlider.maxValue = playerRef.GetComponent<Creature>().MaxHealth;
         healthbarSlider.value = playerRef.GetComponent<Creature>().MaxHealth;

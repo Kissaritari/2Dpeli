@@ -9,18 +9,25 @@ namespace Assets.scripts
         private int Health;
         public int MaxHealth;
         public float Speed;
-      
-
+        public bool dead;
+        void Start () 
+        {
+            Health = MaxHealth;
+            dead = false;
+        }
         // Update is called once per frame
         void Update()
         {
+            
+           // Debug.Log(Health);
             if (Health <= 0)
             {
-                if (gameObject.tag != "Player")
+                dead = true;
+                if (!gameObject.CompareTag("Player"))
                 {
                     Destroy(gameObject);
                 }
-                else if (gameObject.tag == "Player")
+                else if (gameObject.CompareTag("Player"))
                 {
                     GetComponent<Player>().Death();
                 }
