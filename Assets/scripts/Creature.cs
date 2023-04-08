@@ -9,23 +9,28 @@ namespace Assets.scripts
         private int Health;
         public int MaxHealth;
         public float Speed;
-        // Use this for initialization
-        void Start()
-        {
-            Health = MaxHealth;
-        }
+      
 
         // Update is called once per frame
         void Update()
         {
             if (Health <= 0)
             {
-                GameObject.Destroy(gameObject);
+                if (gameObject.tag != "Player")
+                {
+                    Destroy(gameObject);
+                }
+                else if (gameObject.tag == "Player")
+                {
+                    GetComponent<Player>().Death();
+                }
             }
         }
         public void GetDamaged(int Damage)
         {
             Health -= Damage;
         }
+
+
     }
 }

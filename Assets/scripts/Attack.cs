@@ -1,17 +1,19 @@
-﻿using System.Collections;
+﻿using Assets.scripts;
+using System.Collections;
 using UnityEngine;
 
 namespace Assembly_CSharp
 {
     public class Attack : MonoBehaviour
     {
-        float damage;
-        GameObject target;
-        Animator _Animator;
+ 
+        private Animator _Animator;
+        private Creature _Creature;
         // Use this for initialization
         void Start()
         {
             _Animator = GetComponent<Animator>();
+            _Creature = GetComponent<Creature>();
         }
 
         // Update is called once per frame
@@ -29,6 +31,11 @@ namespace Assembly_CSharp
             }
 
       
+        }
+
+        void PlayerAttack(GameObject target)
+        {
+            target.GetComponent<Creature>().GetDamaged(_Creature.Damage);
         }
     }
 }
