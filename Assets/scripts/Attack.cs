@@ -1,6 +1,7 @@
 ﻿using Assets.scripts;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 namespace Assembly_CSharp
 {
@@ -9,6 +10,10 @@ namespace Assembly_CSharp
  
         private Animator _Animator;
         private Creature _Creature;
+        public Transform attackPoint;
+        private float _attackRange = 0.5f;
+        public LayerMask enemyLayers;
+
         // Use this for initialization
         void Start()
         {
@@ -22,20 +27,23 @@ namespace Assembly_CSharp
 
             if (Input.GetButtonDown("Fire1"))
             {
-                _Animator.SetTrigger("Attack");
+                PlayerAttack();
 
-            }
-            if (Input.GetButtonUp("Fire1"))
-            {
-                _Animator.ResetTrigger("Attack");
             }
 
       
         }
 
-        void PlayerAttack(GameObject target)
+        void PlayerAttack()
         {
-            target.GetComponent<Creature>().GetDamaged(_Creature.Damage);
+            _Animator.Play("Attack");
+
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, _attackRange, enemyLayers);
+
+            foreach (var hit in hitEnemies)
+            {
+                hit.GetComponent<Creature>().GetDamaged(_Creature.Damage);
+            }
         }
     }
 }
