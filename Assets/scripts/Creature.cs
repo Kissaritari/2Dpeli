@@ -23,9 +23,11 @@ namespace Assets.scripts
             if (Health <= 0)
             {
                 dead = true;
-                if (!gameObject.CompareTag("Player"))
+                
+                if (gameObject.CompareTag("Vihollinen"))
                 {
-                    Destroy(gameObject);
+                    Debug.Log("kuoleminen");
+                    GetComponent<Vihollinen>().Death();
                 }
                 else if (gameObject.CompareTag("Player"))
                 {

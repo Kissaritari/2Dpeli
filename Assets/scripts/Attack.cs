@@ -11,7 +11,7 @@ namespace Assembly_CSharp
         private Animator _Animator;
         private Creature _Creature;
         public Transform attackPoint;
-        private float _attackRange = 0.5f;
+        public float _attackRange = 0.5f;
         public LayerMask enemyLayers;
 
         // Use this for initialization
@@ -22,19 +22,9 @@ namespace Assembly_CSharp
         }
 
         // Update is called once per frame
-        void Update()
-        {
+  
 
-            if (Input.GetButtonDown("Fire1"))
-            {
-                PlayerAttack();
-
-            }
-
-      
-        }
-
-        void PlayerAttack()
+        public void PlayerAttack()
         {
             _Animator.Play("Attack");
 
@@ -42,8 +32,16 @@ namespace Assembly_CSharp
 
             foreach (var hit in hitEnemies)
             {
+                Debug.Log(hit.name);
                 hit.GetComponent<Creature>().GetDamaged(_Creature.Damage);
             }
+        }
+        private void OnDrawGizmosSelected()
+        {
+            if (attackPoint == null)
+                return;
+
+            Gizmos.DrawWireSphere(attackPoint.position, _attackRange);
         }
     }
 }

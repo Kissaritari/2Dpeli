@@ -1,3 +1,4 @@
+using Assembly_CSharp;
 using Assets.scripts;
 using Cinemachine;
 using System.Collections;
@@ -20,15 +21,20 @@ public class Player : MonoBehaviour
     private Creature stats;
     static int lives = 3;
     public TextMeshProUGUI lifetext;
-    public AudioSource kuolemisaani,kavelyaani;
+    public AudioSource kuolemisaani,kavelyaani,lyomisaani;
     public CinemachineVirtualCamera cam;
+    public float hitCoolDown = 0.55f;
+    private float nextHit;
+    private Attack _playerAttack;
+
     private void Start()
     {
+        _playerAttack = GetComponent<Attack>();
         stats = GetComponent<Creature>();
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         lifetext.text = "Lives: " + lives.ToString();
-        Debug.Log(_rb.isKinematic);
+       
 
        
         if (_rb == null)
@@ -70,9 +76,12 @@ public class Player : MonoBehaviour
                     stats.GetDamaged(stats.MaxHealth);
                 }
             }
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && Time.time > nextHit )
             {
+                _playerAttack.PlayerAttack();
+                nextHit = Time.time + hitCoolDown;
                 _animator.Play("Attack");
+                lyomisaani.Play();
             }
         }
         else
