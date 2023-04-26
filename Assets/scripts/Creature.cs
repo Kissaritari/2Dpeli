@@ -27,7 +27,6 @@ namespace Assets.scripts
                 
                 if (gameObject.CompareTag("Vihollinen"))
                 {
-                  
                     GetComponent<Vihollinen>().Death();
                 }
                 else if (gameObject.CompareTag("Player"))
