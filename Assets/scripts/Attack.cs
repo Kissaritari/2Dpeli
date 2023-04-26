@@ -32,7 +32,7 @@ namespace Assembly_CSharp
 
             foreach (var hit in hitEnemies)
             {
-                Debug.Log(hit.name);
+       
                 hit.GetComponent<Creature>().GetDamaged(_Creature.Damage);
             }
         }

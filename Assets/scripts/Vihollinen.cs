@@ -20,6 +20,7 @@ public class Vihollinen : MonoBehaviour
     public AudioSource kuolemisaani,kavelyaani,lyomisaani;
     public float hitCoolDown = 0.55f;
     private float nextHit;
+ 
     private void Start()
     {
         stats = GetComponent<Creature>();
@@ -44,6 +45,11 @@ public class Vihollinen : MonoBehaviour
                 }
                    
             }
+            else
+            {
+                kavelyaani.Stop();
+            }
+
             if (_rb.transform.position.y < -20)
             {
                 {
@@ -62,12 +68,13 @@ public class Vihollinen : MonoBehaviour
 
     public void Death()
     {
-        Debug.Log("kuoleminen");
+        kavelyaani.enabled = false;
         _animator.Play("die");
         _rb.isKinematic = true;
-        kuolemisaani.Play();
+        stats.dyingSound.Play();
         GetComponent<Collider2D>().enabled = false;
-       this.enabled = false;
+        _rb.velocity = Vector3.zero;
+        this.enabled = false;
     }
     
     

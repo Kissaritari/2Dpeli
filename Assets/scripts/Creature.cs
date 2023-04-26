@@ -10,6 +10,7 @@ namespace Assets.scripts
         public int MaxHealth;
         public float Speed;
         public bool dead;
+        public AudioSource dyingSound;
         void Start () 
         {
             Health = MaxHealth;
@@ -26,7 +27,7 @@ namespace Assets.scripts
                 
                 if (gameObject.CompareTag("Vihollinen"))
                 {
-                    Debug.Log("kuoleminen");
+                  
                     GetComponent<Vihollinen>().Death();
                 }
                 else if (gameObject.CompareTag("Player"))
@@ -39,7 +40,10 @@ namespace Assets.scripts
         {
             Health -= Damage;
         }
-
+        public int GetHealth()
+        {
+            return Health;
+        }
 
     }
 }

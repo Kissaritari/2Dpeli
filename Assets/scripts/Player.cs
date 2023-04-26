@@ -21,11 +21,12 @@ public class Player : MonoBehaviour
     private Creature stats;
     static int lives = 3;
     public TextMeshProUGUI lifetext;
-    public AudioSource kuolemisaani,kavelyaani,lyomisaani;
+    public AudioSource kavelyaani,lyomisaani;
     public CinemachineVirtualCamera cam;
     public float hitCoolDown = 0.55f;
     private float nextHit;
     private Attack _playerAttack;
+
 
     private void Start()
     {
@@ -57,6 +58,8 @@ public class Player : MonoBehaviour
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, jumpingpower);
                 ilmassa = true;
+              
+
             }
             if (Input.GetAxisRaw("Horizontal") > 0)
             {
@@ -68,6 +71,7 @@ public class Player : MonoBehaviour
             }
             if (Mathf.Abs(_rb.velocity.x) > 0.3 && !ilmassa && !kavelyaani.isPlaying)
                 kavelyaani.Play();
+                
 
             if (_rb.transform.position.y < -20)
             {
@@ -83,9 +87,19 @@ public class Player : MonoBehaviour
                 _animator.Play("Attack");
                 lyomisaani.Play();
             }
+            
         }
         else
             cam.Follow = null;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.layer);
+        if (collision.gameObject.layer == 6)
+        {
+            Debug.Log("damagefloor");
+            stats.GetDamaged(50);
+        }
     }
     private void FixedUpdate()
     {
@@ -101,14 +115,18 @@ public class Player : MonoBehaviour
     {
         
         _animator.Play("Death");
+        
         _ = StartCoroutine("DeathAnim");
     }
     public IEnumerator DeathAnim()
     {
+        
         _rb.isKinematic = true;
-        Debug.Log(_rb.isKinematic);
+        Debug.Log("miau mau : )");
+        stats.dyingSound.Play();
+        
         _animator.SetBool("dead",true);
-        kuolemisaani.Play();
+        
         yield return new WaitForSeconds(3);
         
         if (lives > 0)

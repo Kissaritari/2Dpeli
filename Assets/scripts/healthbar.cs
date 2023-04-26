@@ -22,5 +22,9 @@ public class healthbar : MonoBehaviour
     {
         if (healthbarSlider.value < healthbarSlider.maxValue)
             atMaxHp = false;
+        else
+            atMaxHp = true;
+
+        healthbarSlider.value = playerRef.GetComponent<Creature>().GetHealth();
     }
 }
