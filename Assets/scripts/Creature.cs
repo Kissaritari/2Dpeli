@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.scripts
 {
@@ -10,8 +9,9 @@ namespace Assets.scripts
         public int MaxHealth;
         public float Speed;
         public bool dead;
-        public AudioSource dyingSound;
-        void Start () 
+        public AudioSource dyingSound, osumisaani
+            ;
+        void Start()
         {
             Health = MaxHealth;
             dead = false;
@@ -19,12 +19,12 @@ namespace Assets.scripts
         // Update is called once per frame
         void Update()
         {
-            
-           // Debug.Log(Health);
+
+            // Debug.Log(Health);
             if (Health <= 0)
             {
                 dead = true;
-                
+
                 if (gameObject.CompareTag("Vihollinen"))
                 {
                     GetComponent<Vihollinen>().Death();
@@ -37,7 +37,15 @@ namespace Assets.scripts
         }
         public void GetDamaged(int Damage)
         {
-            Health -= Damage;
+            if (!dead)
+            {
+                osumisaani.PlayDelayed(0.2f);
+                Health -= Damage;
+                if (gameObject.CompareTag("Player") && Health > 0)
+                {
+                    gameObject.GetComponent<Player>().DmgFlash(.6f);
+                }
+            }
         }
         public int GetHealth()
         {

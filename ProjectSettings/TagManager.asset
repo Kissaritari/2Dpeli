@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Ground
   - '"Ground"'
-  - vihollinen
   - Vihollinen
+  - gem
+  - portaali
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - damage
   - enemy
-  - 
-  - 
+  - player
+  - raja
   - 
   - 
   - 

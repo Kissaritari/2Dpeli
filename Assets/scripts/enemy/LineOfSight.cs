@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -34,9 +33,9 @@ public class LineOfSight : MonoBehaviour
     }
     private void FieldOfViewCheck()
     {
-        Collider[] rangeChjecks = Physics.OverlapSphere(transform.position, radius,targetMask);
+        Collider[] rangeChjecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
-        if(rangeChjecks.Length != 0 )
+        if (rangeChjecks.Length != 0)
         {
             Transform target = rangeChjecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
@@ -44,10 +43,10 @@ public class LineOfSight : MonoBehaviour
             if (Vector3.Angle(transform.position, directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
-                if (!Physics.Raycast(transform.position, directionToTarget,distanceToTarget,obstructionnMask)) 
-                    {
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionnMask))
+                {
                     canSeePlayer = true;
-                    }
+                }
                 else
                     canSeePlayer = false;
             }
@@ -55,7 +54,7 @@ public class LineOfSight : MonoBehaviour
                 canSeePlayer = false;
         }
         else
-            canSeePlayer= false;
+            canSeePlayer = false;
 
     }
 }

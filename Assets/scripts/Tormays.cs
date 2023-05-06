@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEditor.UI;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.scripts
 {
@@ -14,7 +12,7 @@ namespace Assets.scripts
             {
                 int damage = GetComponent<Creature>().Damage;
                 collision.gameObject.GetComponent<Creature>().GetDamaged(damage);
-                
+
             }
         }
     }

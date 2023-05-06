@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class dFov : MonoBehaviour
@@ -10,7 +9,7 @@ public class dFov : MonoBehaviour
     public LayerMask targetLayer;
     public LayerMask obstructionLayer;
     public GameObject playerRef;
-    public bool canSeePlayer {  get; private set; }
+    public bool canSeePlayer { get; private set; }
 
     private void Start()
     {

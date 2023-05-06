@@ -1,7 +1,4 @@
 using Assets.scripts;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Lepakko : MonoBehaviour
@@ -15,7 +12,7 @@ public class Lepakko : MonoBehaviour
     void Start()
     {
         stats = GetComponent<Creature>();
-        _rb= GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         if (_rb == null)
         {
             Debug.LogError("Lepakko is missing a Rigidbody2D component");
@@ -42,7 +39,6 @@ public class Lepakko : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
     }
 }
- 
