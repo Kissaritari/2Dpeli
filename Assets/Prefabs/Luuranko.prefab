@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 4753572229683624121}
   - component: {fileID: 1288397648984693349}
   - component: {fileID: 5931870144106697045}
+  - component: {fileID: 9210576732761245033}
   m_Layer: 8
   m_Name: Luuranko
   m_TagString: Player
@@ -44,7 +45,7 @@ Transform:
   - {fileID: 6700679136680680558}
   - {fileID: 1690988946848489116}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7207906104545870004
 SpriteRenderer:
@@ -195,14 +196,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetext: {fileID: 0}
   gemtext: {fileID: 0}
+  pbTime: {fileID: 0}
+  currentTime: {fileID: 0}
+  gemmilkm: {fileID: 0}
   kavelyaani: {fileID: 905771421666224742}
   lyomisaani: {fileID: 2678063260742845492}
   pickup: {fileID: 1288397648984693349}
   teleport: {fileID: 5931870144106697045}
+  viestiAani: {fileID: 9210576732761245033}
   cam: {fileID: 5149377793280771183}
   hitCoolDown: 0.7
   _dmgFlash: {fileID: 0}
   _flashColor: {r: 1, g: 0, b: 0, a: 0}
+  _panel: {fileID: 0}
 --- !u!114 &6262212610332130392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,7 +734,103 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 567389bfa204cf740a35b8b48df00b77, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c9587c52391afc94d9e670e6563b8875, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &9210576732761245033
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589709859335461321}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4f37c8017277704429b3c4e04f559769, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

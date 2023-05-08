@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private Creature stats;
     static int lives = 3;
     public TextMeshProUGUI lifetext, gemtext,pbTime,currentTime,gemmilkm;
-    public AudioSource kavelyaani, lyomisaani,pickup,teleport;
+    public AudioSource kavelyaani, lyomisaani,pickup,teleport,viestiAani;
     public CinemachineVirtualCamera cam;
     public float hitCoolDown = 0.55f;
     private float nextHit;
@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
+        pisteet = 0;
+        gemtext.text = pisteet.ToString();
         gemmilkm.text = Portaali.gemmien_lkm.ToString();
         _playerAttack = GetComponent<Attack>();
         stats = GetComponent<Creature>();
@@ -39,9 +41,9 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         lifetext.text = "Lives: " + lives.ToString();
         _renderer = GetComponent<SpriteRenderer>();
-        if (PlayerPrefs.HasKey("pb"))
+        if (PlayerPrefs.HasKey("pb" + SceneManager.GetActiveScene().buildIndex.ToString()))
         {
-            float pb = PlayerPrefs.GetFloat(key: "pb");
+            float pb = PlayerPrefs.GetFloat(key: "pb" + SceneManager.GetActiveScene().buildIndex.ToString());
             pbTime.text = pb.ToString() + " s";
         }
 
@@ -108,18 +110,26 @@ public class Player : MonoBehaviour
         {
             if(!Portaali.activity)
             {
+                viestiAani.Play();
                 _panel.SetActive(true);
             }
             else if (Portaali.activity)
             {
-                teleport.Play();
-                _dmgFlash.StartFlash(.3f, 1f, Color.blue);
-
-                if (!PlayerPrefs.HasKey("pb" + SceneManager.GetActiveScene().buildIndex.ToString()) || PlayerPrefs.GetFloat("pb") > Time.timeSinceLevelLoad)
+                if (!teleport.isPlaying) 
+                {
+                    teleport.Play(); 
+                }
+                
+                _dmgFlash.DeathColor(1.6f, 1f, Color.blue);
+                
+                if (!PlayerPrefs.HasKey("pb" + SceneManager.GetActiveScene().buildIndex.ToString()) ||
+                    PlayerPrefs.GetFloat("pb" + SceneManager.GetActiveScene().buildIndex.ToString()) > Time.timeSinceLevelLoad &&
+                    PlayerPrefs.GetFloat("pb" + SceneManager.GetActiveScene().buildIndex.ToString()) > 0f)
                 {
                     PlayerPrefs.SetFloat(key: "pb" + SceneManager.GetActiveScene().buildIndex.ToString(), value: Time.timeSinceLevelLoad);
                 }
-                SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex + 1);
+                _ = StartCoroutine(nameof(portalEffects));
+                
             }
             
         }
@@ -183,6 +193,11 @@ public class Player : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+    }
+    public IEnumerator portalEffects()
+    {
+        yield return new WaitForSeconds(1.6f);
+        SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 
