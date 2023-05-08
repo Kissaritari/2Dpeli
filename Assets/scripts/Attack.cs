@@ -42,5 +42,6 @@ namespace Assembly_CSharp
 
             Gizmos.DrawWireSphere(attackPoint.position, AttackRange);
         }
+       
     }
 }

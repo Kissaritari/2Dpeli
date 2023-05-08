@@ -6,7 +6,8 @@ public class MeleeEnemy : MonoBehaviour
 {
     [SerializeField] private float attackCooldown;
     [SerializeField] private Transform attackPoint;
-    private float cooldownTimer = Mathf.Infinity;
+    private float cooldownTimer = 0;
+    private float sightTimer = 0;
     public BoxCollider2D _boxCollider;
     public Attack _attackScript;
     private Creature _creature;
@@ -26,16 +27,25 @@ public class MeleeEnemy : MonoBehaviour
         if (!_creature.dead)
         {
             cooldownTimer += Time.deltaTime;
+          
             if (PlayerInSight())
             {
+                sightTimer = cooldownTimer;
+                _patrolScript.SetAttacking(true);
                 if (cooldownTimer >= attackCooldown)
                 {
-
+                    print("cooldown ohi, hit käynnistyy");
+                    
                     _vihollinen.Hit();
                 }
             }
-            if (cooldownTimer < 2 && !PlayerInSight())
-                _patrolScript.attacking = false;
+            if (cooldownTimer - sightTimer > 1.7 & !PlayerInSight())
+            {
+                print("poistetaan attacking true");
+                _patrolScript.SetAttacking(false);
+            }
+          
+                
         }
 
 
@@ -64,6 +74,7 @@ public class MeleeEnemy : MonoBehaviour
             if (hit.CompareTag("Player"))
             {
                 sight = true;
+                Debug.Log("sight true palautetaan");
             }
         }
         return sight;

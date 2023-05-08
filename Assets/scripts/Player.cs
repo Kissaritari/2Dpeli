@@ -62,11 +62,11 @@ public class Player : MonoBehaviour
             // spriten käännöt
             if (Input.GetAxisRaw("Horizontal") > 0)
             {
-                _renderer.flipX = false;
+                gameObject.transform.localScale = new Vector3(5.191104f, 4.700242f, 2.1049f);
             }
             else if (Input.GetAxisRaw("Horizontal") < 0)
             {
-                _renderer.flipX = true;
+                gameObject.transform.localScale = new Vector3(-5.191104f, 4.700242f, 2.1049f);
             }
             // kävelyäänen toisto
             if (Mathf.Abs(_rb.velocity.x) > 0.3 && !ilmassa && !kavelyaani.isPlaying)
@@ -114,9 +114,10 @@ public class Player : MonoBehaviour
             {
                 teleport.Play();
                 _dmgFlash.StartFlash(.3f, 1f, Color.blue);
-                if (!PlayerPrefs.HasKey("pb") || PlayerPrefs.GetFloat("pb") < Time.timeSinceLevelLoad)
+
+                if (!PlayerPrefs.HasKey("pb" + SceneManager.GetActiveScene().buildIndex.ToString()) || PlayerPrefs.GetFloat("pb") > Time.timeSinceLevelLoad)
                 {
-                    PlayerPrefs.SetFloat(key: "pb", value: Time.timeSinceLevelLoad);
+                    PlayerPrefs.SetFloat(key: "pb" + SceneManager.GetActiveScene().buildIndex.ToString(), value: Time.timeSinceLevelLoad);
                 }
                 SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex + 1);
             }

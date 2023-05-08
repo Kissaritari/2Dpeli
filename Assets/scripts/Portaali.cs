@@ -14,7 +14,7 @@ public class Portaali : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Player.pisteet >= gemmien_lkm)
+        if (Player.pisteet >= gemmien_lkm && !activity)
         {
             activity = true;
             GetComponent<Animator>().Play("open");

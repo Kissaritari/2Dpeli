@@ -9,7 +9,6 @@ public class Patrol : MonoBehaviour
     private float speed;
     private int direction = 1;
     public bool attacking = false;
-    private Animator animator;
     private Vihollinen _vihollinen;
 
     // Start is called before the first frame update
@@ -17,7 +16,6 @@ public class Patrol : MonoBehaviour
     {
         _vihollinen = GetComponent<Vihollinen>();
         speed = GetComponent<Creature>().Speed;
-        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -25,7 +23,7 @@ public class Patrol : MonoBehaviour
         if (!attacking && !_vihollinen.ruumis)
         {
             transform.Translate(direction * speed * Time.deltaTime * Vector2.left);
-            animator.Play("run");
+
         }
 
     }
@@ -39,5 +37,9 @@ public class Patrol : MonoBehaviour
         {
             direction = -1;
         }
+    }
+    public void SetAttacking(bool arvo)
+    {
+        attacking = arvo;
     }
 }
