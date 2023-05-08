@@ -7,8 +7,9 @@ public class Portaali : MonoBehaviour
     [SerializeField] private GameObject gemmiEmpty;
     static public int gemmien_lkm;
     static public bool activity = false;
-    private void Start()
+    private void Awake()
     {
+        activity = false;
         gemmien_lkm = gemmiEmpty.transform.childCount;
     }
     // Update is called once per frame
